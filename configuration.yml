@@ -1,0 +1,17 @@
+apiName: "Webshop API"
+
+assets:
+  mappings:
+    /assets: /
+  overrides:
+    /: ../webshop-client/
+
+server:
+  rootPath: /api/*
+  adminContextPath: /admin
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
