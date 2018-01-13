@@ -73,7 +73,7 @@ public class UserDAOTest
         System.out.println("Test add");
         
         User user = new User();
-        user.setFullName("Peter van Vliet");
+        user.setVoornaam("Peter van Vliet");
         
         subject.add(user);
         

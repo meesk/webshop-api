@@ -16,30 +16,23 @@ public class UserService extends BaseService<User>
     private final UserDAO dao;
     
     @Inject
-    public UserService(UserDAO dao)
-    {
+    public UserService(UserDAO dao) {
         this.dao = dao;
     }
     
-    public Collection<User> getAll()
-    {
+    public Collection<User> getAll() {
         return dao.getAll();
     }
     
-    public User get(int id)
-    {
+    public User get(int id) {
         return requireResult(dao.get(id));
     }
     
-    public void add(User user)
-    {
-        user.setRoles(new String[] { "GUEST" });
-        
+    public void add(User user) {        
         dao.add(user);
     }
     
-    public void update(User authenticator, int id, User user)
-    {
+    public void update(User authenticator, int id, User user) {
         // Controleren of deze gebruiker wel bestaat
         User oldUser = get(id);
         
@@ -53,11 +46,7 @@ public class UserService extends BaseService<User>
         dao.update(id, user);
     }
     
-    public void delete(int id)
-    {
-        // Controleren of deze gebruiker wel bestaat
-        User user = get(id);
-        
+    public void delete(int id) {
         dao.delete(id);
     }
 }

@@ -3,6 +3,7 @@ package nl.hsleiden.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.security.Principal;
+import javax.validation.constraints.NotNull;
 import nl.hsleiden.View;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -16,42 +17,81 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class User implements Principal
 {
-    @NotEmpty
+    
+    private Integer id;
+    
+    // @NotEmpty
     @Length(min = 3, max = 100)
     @JsonView(View.Public.class)
-    private String fullName;
+    private String voornaam;
     
-    @NotEmpty
-    @Length(min = 6, max = 7)
+    @Length(max = 100)
+    @JsonView(View.Public.class)
+    private String tussenvoegsel;
+    
+    @Length(min = 3, max = 100)
+    @JsonView(View.Public.class)
+    private String achternaam;
+    
+    // @NotEmpty
+    @Length(min = 4, max = 7)
     @JsonView(View.Public.class)
     private String postcode;
+
     
-    @NotEmpty
-    @Length(min = 1, max = 10)
-    @JsonView(View.Public.class)
-    private String streetnumber;
-    
-    @NotEmpty
+    // @NotEmpty
     @Email
     @JsonView(View.Public.class)
-    private String emailAddress;
+    private String email;
     
-    @NotEmpty
-    @Length(min = 8)
+    // @NotEmpty
+    @Length(min = 4)
     @JsonView(View.Protected.class)
     private String password;
     
-    @JsonView(View.Private.class)
-    private String[] roles;
-
-    public String getFullName()
+    @JsonView(View.Public.class)
+    private String rol;
+    
+    public Integer getId()
     {
-        return fullName;
+        return id;
     }
 
-    public void setFullName(String fullName)
+    public void setId(Integer id)
     {
-        this.fullName = fullName;
+        this.id = id;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getVoornaam() {
+        return voornaam;
+    }
+
+    public void setVoornaam(String voornaam) {
+        this.voornaam = voornaam;
+    }
+
+    public String getTussenvoegsel() {
+        return tussenvoegsel;
+    }
+
+    public void setTussenvoegsel(String tussenvoegsel) {
+        this.tussenvoegsel = tussenvoegsel;
+    }
+
+    public String getAchternaam() {
+        return achternaam;
+    }
+
+    public void setAchternaam(String achternaam) {
+        this.achternaam = achternaam;
     }
 
     public String getPostcode()
@@ -64,24 +104,14 @@ public class User implements Principal
         this.postcode = postcode;
     }
 
-    public String getStreetnumber()
+    public String getEmail()
     {
-        return streetnumber;
+        return email;
     }
 
-    public void setStreetnumber(String streetnumber)
+    public void setEmail(String email)
     {
-        this.streetnumber = streetnumber;
-    }
-
-    public String getEmailAddress()
-    {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress)
-    {
-        this.emailAddress = emailAddress;
+        this.email = email;
     }
 
     public String getPassword()
@@ -89,46 +119,26 @@ public class User implements Principal
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public boolean hasRole(String role){
+        if(rol != null){
+            if(role.equals(this.rol)){
+                return true;
+            }
+        }
+        return true;
     }
 
     @Override
     @JsonIgnore
-    public String getName()
-    {
-        return fullName;
+    public String getName() {
+        return voornaam;
     }
     
-    public String[] getRoles()
-    {
-        return roles;
-    }
-
-    public void setRoles(String[] roles)
-    {
-        this.roles = roles;
-    }
-    
-    public boolean hasRole(String roleName)
-    {
-        if (roles != null)
-        {
-            for(String role : roles)
-            {
-                if(roleName.equals(role))
-                {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
-    }
-    
-    public boolean equals(User user)
-    {
-        return emailAddress.equals(user.getEmailAddress());
+    public boolean equals(User user) {
+        return email.equals(user.getEmail());
     }
 }

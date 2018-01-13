@@ -73,7 +73,7 @@ public class AuthenticationServiceTest
     public void testAuthorizeSuccess()
     {
         User user = new User();
-        user.setRoles(new String[] { "GUEST", "ADMIN" });
+//        user.setRoles(new String[] { "GUEST", "ADMIN" });
         
         boolean actual = subject.authorize(user, "ADMIN");
         
@@ -84,7 +84,7 @@ public class AuthenticationServiceTest
     public void testAuthorizeFailed()
     {
         User user = new User();
-        user.setRoles(new String[] { "GUEST" });
+//        user.setRoles(new String[] { "GUEST" });
         
         boolean actual = subject.authorize(user, "ADMIN");
         

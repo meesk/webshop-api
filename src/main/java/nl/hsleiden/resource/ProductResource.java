@@ -52,6 +52,27 @@ public class ProductResource
         return service.get(id);
     }
     
+    @GET
+    @Path("/cart/user/{id}")
+    @JsonView(View.Public.class)
+    public Collection<Product> getCart(@PathParam("id") int id) {
+        return service.getCart(id);
+    }
+    
+    @POST
+    @Path("/{id}/cart/user/{user_id}")
+    @JsonView(View.Public.class)
+    public void addCart(@PathParam("id") int prodId, @PathParam("user_id") int userId) {
+        service.addCart(prodId, userId);
+    }
+    
+    @DELETE
+    @Path("/{id}/cart/user/{user_id}")
+    @JsonView(View.Public.class)
+    public void deleteCart(@PathParam("id") int prodId, @PathParam("user_id") int userId) {
+        service.deleteCart(prodId, userId);
+    }
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(View.Protected.class)
@@ -60,19 +81,18 @@ public class ProductResource
         service.add(product);
     }
     
-//    @PUT
-//    @Path("/{id}")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @JsonView(View.Protected.class)
-//    public void update(@PathParam("id") int id, @Auth Product authenticator, Product product)
-//    {
-////      service.update(authenticator, id, product);
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @JsonView(View.Protected.class)
+    public void update(@PathParam("id") int id, Product product)
+    {
+        service.update(id, product);
 //        System.out.println("Not implemented yet.");
-//    }
+    }
 //    
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
     public void delete(@PathParam("id") int id)
     {
         service.delete(id);

@@ -24,7 +24,7 @@ public class Product
     private String prodNaam;
     
     @NotEmpty
-    @Length(min = 6, max = 255)
+    @Length(min = 6)
     @JsonView(View.Public.class)
     private String prodBeschrijving;
     
@@ -35,7 +35,6 @@ public class Product
     @JsonView(View.Public.class)
     private String prodAfbeelding;
     
-    @NotEmpty
     @JsonView(View.Public.class)
     private String prodBedrijf;
 

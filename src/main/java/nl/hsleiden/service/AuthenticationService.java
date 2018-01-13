@@ -46,6 +46,7 @@ public class AuthenticationService implements Authenticator<BasicCredentials, Us
     @Override
     public boolean authorize(User user, String roleName)
     {
+        System.out.println("role: " + user.hasRole(roleName));
         return user.hasRole(roleName);
     }
 }

@@ -27,6 +27,18 @@ public class ProductService extends BaseService<Product>
         return dao.getAll();
     }
     
+    public Collection<Product> getCart(int id){
+        return dao.getCart(id);
+    }
+    
+    public void addCart(int prodId, int userId){
+        dao.addCart(prodId, userId);
+    }
+        
+    public void deleteCart(int prodId, int userId){
+        dao.deleteCart(prodId, userId);
+    }
+    
     public Product get(int id)
     {
         return requireResult(dao.get(id));
@@ -38,7 +50,7 @@ public class ProductService extends BaseService<Product>
         dao.add(product);
     }
     
-    public void update(User authenticator, int id, User user) {
+    public void update(int id, Product product) {
 //        // Controleren of deze gebruiker wel bestaat
 //        User oldUser = get(id);
 //        
@@ -49,14 +61,11 @@ public class ProductService extends BaseService<Product>
 //            assertSelf(authenticator, oldUser);
 //        }
 //        
-//        dao.update(id, user);
+        dao.update(id, product);
     }
     
     public void delete(int id)
-    {
-        // Controleren of deze gebruiker wel bestaat
-        Product product = get(id);
-        
+    {        
         dao.delete(id);
     }
 }

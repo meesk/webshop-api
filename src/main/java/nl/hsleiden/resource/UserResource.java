@@ -41,7 +41,6 @@ public class UserResource
     
     @GET
     @JsonView(View.Public.class)
-    @RolesAllowed("GUEST")
     public Collection<User> retrieveAll()
     {
         return service.getAll();
@@ -50,7 +49,6 @@ public class UserResource
     @GET
     @Path("/{id}")
     @JsonView(View.Public.class)
-    @RolesAllowed("GUEST")
     public User retrieve(@PathParam("id") int id)
     {
         return service.get(id);
@@ -76,9 +74,7 @@ public class UserResource
     
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
-    public void delete(@PathParam("id") int id)
-    {
+    public void delete(@PathParam("id") int id) {
         service.delete(id);
     }
     
@@ -87,6 +83,7 @@ public class UserResource
     @JsonView(View.Private.class)
     public User authenticate(@Auth User authenticator)
     {
+        System.out.println("authenticator: " + authenticator);
         return authenticator;
     }
 }
