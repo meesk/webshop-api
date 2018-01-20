@@ -9,7 +9,7 @@ import nl.hsleiden.persistence.ProductDAO;
 
 /**
  *
- * @author Peter van Vliet
+ * @author Mees Kluivers
  */
 @Singleton
 public class ProductService extends BaseService<Product>
@@ -27,18 +27,6 @@ public class ProductService extends BaseService<Product>
         return dao.getAll();
     }
     
-    public Collection<Product> getCart(int id){
-        return dao.getCart(id);
-    }
-    
-    public void addCart(int prodId, int userId){
-        dao.addCart(prodId, userId);
-    }
-        
-    public void deleteCart(int prodId, int userId){
-        dao.deleteCart(prodId, userId);
-    }
-    
     public Product get(int id)
     {
         return requireResult(dao.get(id));
@@ -51,16 +39,6 @@ public class ProductService extends BaseService<Product>
     }
     
     public void update(int id, Product product) {
-//        // Controleren of deze gebruiker wel bestaat
-//        User oldUser = get(id);
-//        
-//        if (!authenticator.hasRole("ADMIN"))
-//        {
-//            // Vaststellen dat de geauthenticeerde gebruiker
-//            // zichzelf aan het aanpassen is
-//            assertSelf(authenticator, oldUser);
-//        }
-//        
         dao.update(id, product);
     }
     

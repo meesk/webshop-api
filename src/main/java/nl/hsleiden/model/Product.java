@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * Meer informatie over validatie:
  *  http://hibernate.org/validator/
  * 
- * @author Peter van Vliet
+ * @author Mees Kluivers
  */
 public class Product
 {

@@ -17,85 +17,14 @@ import nl.hsleiden.model.Product;
  * @author Mees Kluivers
  */
 @Singleton
-public class ProductDAO {
+public class CartDAO {
     private final List<Product> products;
     private final Database db;
 
     @Inject
-    public ProductDAO() {
+    public CartDAO() {
         products = new ArrayList<>();
         db = new Database();
-    }
-    
-    public List<Product> getAll()
-    {
-        products.clear();
-        try{
-            Connection con = db.getConnection();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from product order by prod_nummer");
-            Product product;
-            while(rs.next()){
-                product = new Product();
-                product.setProdNaam(rs.getString("prod_naam"));
-                product.setProdBeschrijving(rs.getString("prod_beschrijving"));
-                product.setProdNummer(rs.getInt("prod_nummer"));
-                product.setProdAfbeelding(rs.getString("prod_afbeelding"));
-                product.setProdPrijs(rs.getDouble("prod_prijs"));
-                products.add(product);
-            }
-            db.closeConnection(con);
-            return products;
-        }catch(SQLException e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    public Product get(int id)
-    {
-        try
-        {
-            return products.get(id);
-        }
-        catch(IndexOutOfBoundsException exception)
-        {
-            return null;
-        }
-    }
-    
-    public void add(Product product)
-    {
-        try{
-            Connection con = db.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO product (prod_naam, prod_prijs, prod_beschrijving, prod_afbeelding) VALUES"
-                    + " (?,?,?,?)");
-            ps.setString(1,product.getProdNaam());
-            ps.setDouble(2,product.getProdPrijs());
-            ps.setString(3, product.getProdBeschrijving());
-            ps.setString(4,product.getProdAfbeelding());
-            ps.execute();
-            db.closeConnection(con);
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-    
-    public void update(int id, Product product)
-    {
-                try{
-                Connection con = db.getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE product SET prod_naam = ?, prod_prijs = ?, prod_beschrijving = ?, prod_afbeelding = ? WHERE prod_nummer = ?");
-            ps.setString(1,product.getProdNaam());
-            ps.setDouble(2, product.getProdPrijs());
-            ps.setString(3, product.getProdBeschrijving());
-            ps.setString(4, product.getProdAfbeelding());
-            ps.setInt(5, id);
-            ps.execute();
-            db.closeConnection(con);
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
     }
     
     public List<Product> getCart(int id){
@@ -149,16 +78,19 @@ public class ProductDAO {
         } 
     }
     
-    public void delete(int id)
-    {
-        try{
+    public void updateCart(int prodId, int userId){
+         try{
             Connection con = db.getConnection();
-            PreparedStatement ps = con.prepareStatement("DELETE FROM product WHERE prod_nummer = ?");
-            ps.setInt(1,id);
+            PreparedStatement ps = con.prepareStatement("UPDATE cart SET product_id = ? WHERE gebruiker_id = ?");
+            ps.setInt(1, prodId);
+            ps.setInt(2, userId);
             ps.execute();
             db.closeConnection(con);
         }catch(SQLException e){
             e.printStackTrace();
-        }
+        } 
     }
+    
+    
+
 }

@@ -32,54 +32,54 @@ public class UserDAOTest
         
         subject = null;
     }
-    
-    @Test
-    public void testGetSuccess()
-    {
-        System.out.println("test get success");
-        
-        String expectedName = "Second user";
-        User actual = subject.get(1);
-        
-        assertNotNull(actual);
-        assertEquals(expectedName, actual.getName());
-    }
-    
-    @Test
-    public void testGetFailed()
-    {
-        System.out.println("Test get failed");
-        
-        User actual = subject.get(6);
-        
-        assertNull(actual);
-    }
-    
-    @Test
-    public void testGetByEmailAddress()
-    {
-        System.out.println("Test by email address");
-        
-        String expectedName = "First user";
-        User actual = subject.getByEmailAddress("first@user.com");
-        
-        assertNotNull(actual);
-        assertEquals(expectedName, actual.getName());
-    }
-    
-    @Test
-    public void testAdd()
-    {
-        System.out.println("Test add");
-        
-        User user = new User();
-        user.setVoornaam("Peter van Vliet");
-        
-        subject.add(user);
-        
-        int expectedSize = 3;
-        int actualSize = subject.getAll().size();
-        
-        assertEquals(expectedSize, actualSize);
-    }
+//    
+//    @Test
+//    public void testGetSuccess()
+//    {
+//        System.out.println("test get success");
+//        
+//        String expectedName = "Second user";
+//        User actual = subject.get(1);
+//        
+//        assertNotNull(actual);
+//        assertEquals(expectedName, actual.getName());
+//    }
+//    
+//    @Test
+//    public void testGetFailed()
+//    {
+//        System.out.println("Test get failed");
+//        
+//        User actual = subject.get(6);
+//        
+//        assertNull(actual);
+//    }
+//    
+//    @Test
+//    public void testGetByEmailAddress()
+//    {
+//        System.out.println("Test by email address");
+//        
+//        String expectedName = "First user";
+//        User actual = subject.getByEmailAddress("first@user.com");
+//        
+//        assertNotNull(actual);
+//        assertEquals(expectedName, actual.getName());
+//    }
+//    
+//    @Test
+//    public void testAdd()
+//    {
+//        System.out.println("Test add");
+//        
+//        User user = new User();
+//        user.setVoornaam("Peter van Vliet");
+//        
+//        subject.add(user);
+//        
+//        int expectedSize = 3;
+//        int actualSize = subject.getAll().size();
+//        
+//        assertEquals(expectedSize, actualSize);
+//    }
 }

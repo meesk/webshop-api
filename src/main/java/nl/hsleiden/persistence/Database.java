@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Laurens Jan
+ * @author Mees Kluivers
  */
 public class Database {
     private static String url = "jdbc:mysql://localhost:3306/webshop";
