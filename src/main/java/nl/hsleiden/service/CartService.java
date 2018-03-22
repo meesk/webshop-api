@@ -36,4 +36,8 @@ public class CartService extends BaseService<User>
     public void updateCart(int prodId, int userId) {
         dao.updateCart(prodId, userId);
     }
+    
+    public void deleteAll(int userId) {
+    	dao.deleteAll(userId);
+    }
 }

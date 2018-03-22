@@ -49,4 +49,5 @@ public class AuthenticationService implements Authenticator<BasicCredentials, Us
         System.out.println("role: " + user.hasRole(roleName));
         return user.hasRole(roleName);
     }
+    
 }

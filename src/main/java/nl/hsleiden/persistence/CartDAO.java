@@ -78,6 +78,18 @@ public class CartDAO {
         } 
     }
     
+    public void deleteAll(int userId){
+        try{
+           Connection con = db.getConnection();
+           PreparedStatement ps = con.prepareStatement("DELETE FROM cart WHERE gebruiker_id = ?");
+           ps.setInt(1, userId);
+           ps.execute();
+           db.closeConnection(con);
+       }catch(SQLException e){
+           e.printStackTrace();
+       } 
+   }
+    
     public void updateCart(int prodId, int userId){
          try{
             Connection con = db.getConnection();
